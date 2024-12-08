@@ -15,11 +15,11 @@ def verificar_autenticacao():
 
 def obter_saudacao():
     agora = datetime.now()
-    if agora.hour < 12:
+    if 4 > agora.hour < 12:
         return "Bom dia"
     elif 12 <= agora.hour < 18:
         return "Boa tarde"
-    elif 18 <= agora.hour < 3:
+    else :
         return "Boa noite"
 
 def inicio():
