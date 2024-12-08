@@ -1,0 +1,40 @@
+.stButton > button, .stTextInput > label, .stSuccess, .stError {
+    transition: none; 
+    animation: none;  
+    box-shadow: none;  
+}
+
+.stTextInput input {
+    border: 2px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease; 
+}
+
+.stTextInput input:focus {
+    border-color: #1a73e8; 
+    background-color: #000000; 
+    box-shadow: 0 0 8px rgba(26, 115, 232, 0.6);
+}
+
+.css-1d391kg {
+    font-size: 3rem;
+    color: #000000; 
+    font-weight: 700;
+    text-align: center;
+}
+
+.stButton > button {
+    background-color: #1a73e8;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.stButton > button:hover {
+    background-color: #155ab6;
+}
