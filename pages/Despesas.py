@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
-from datetime import datetime  # Importando para pegar a data e hora atual
+from datetime import datetime
+import pytz  
 
 def verificar_autenticacao():
     if "email" not in st.session_state or "nome_de_usuario" not in st.session_state or "senha" not in st.session_state:
@@ -11,15 +12,18 @@ def verificar_autenticacao():
         return False 
     return True 
 
+from datetime import datetime
+import pytz
+
 def despesas():
-    if not verificar_autenticacao(): 
+    if not verificar_autenticacao():
         return 
 
     def image_to_base64(image_path):
         with open(image_path, "rb") as img_file:
             return base64.b64encode(img_file.read()).decode('utf-8')
 
-    image_path = "img/despesaimagem1.jpg" 
+    image_path = "img/despesaimagem1.jpg"
 
     image_base64 = image_to_base64(image_path)
 
@@ -46,7 +50,7 @@ def despesas():
     st.markdown(css, unsafe_allow_html=True)
 
     if "despesas" not in st.session_state:
-        st.session_state.despesas = [] 
+        st.session_state.despesas = []
 
     st.markdown("""
         <style>
@@ -86,7 +90,7 @@ def despesas():
 
     nome_despesa = st.text_input("Nome ou descrição da despesa:")
     valor_despesa = st.number_input("Informe o valor da despesa", min_value=0.0, format="%.2f")
-    
+
     # Lista de categorias de despesa
     categorias = [
         "Alimentação", "Transporte", "Saúde", "Educação", "Moradia", 
@@ -96,16 +100,19 @@ def despesas():
 
     if st.button("Adicionar despesa"):
         if valor_despesa > 0 and nome_despesa.strip() != "" and categoria_despesa != "":
-            horario_adicao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Pega a data e hora atual
+            # Ajustando para o fuso horário correto
+            fuso_horario = pytz.timezone("America/Sao_Paulo")
+            horario_adicao = datetime.now(pytz.utc).astimezone(fuso_horario).strftime("%Y-%m-%d %H:%M:%S")
+
             despesa = {
                 "nome": nome_despesa, 
                 "valor": valor_despesa, 
                 "categoria": categoria_despesa,
-                "hora": horario_adicao  # Armazena a hora em que a despesa foi adicionada
+                "hora": horario_adicao
             }
             st.session_state.despesas.append(despesa)
             st.success(f"Despesa '{nome_despesa}' de R${valor_despesa:.2f} na categoria '{categoria_despesa}' adicionada às {horario_adicao}!")
         else:
-            st.warning("Por favor, preencha todos os campos corretamente.") 
+            st.warning("Por favor, preencha todos os campos corretamente.")
 
 despesas()
