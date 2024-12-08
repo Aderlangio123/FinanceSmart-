@@ -24,8 +24,8 @@ def obter_saudacao():
 
 
 def inicio():
-    #if not verificar_autenticacao():
-        #return
+    if not verificar_autenticacao():
+        return
 
     nome_usuario = st.session_state.get("nome_de_usuario", "Cliente")
     saudacao = obter_saudacao()
