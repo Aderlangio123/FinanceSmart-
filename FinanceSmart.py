@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
 from datetime import datetime
+import pytz
 
 st.sidebar.image("img/logo-empresa.png")
 
@@ -14,7 +15,9 @@ def verificar_autenticacao():
     return True
 
 def obter_saudacao():
-    agora = datetime.now()
+    fuso_horario = pytz.timezone("America/Sao_Paulo")
+    agora = datetime.now(fuso_horario)
+
     if 4 <= agora.hour < 12:
         return "Bom dia"
     elif 12 <= agora.hour < 18:
