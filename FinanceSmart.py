@@ -15,16 +15,17 @@ def verificar_autenticacao():
 
 def obter_saudacao():
     agora = datetime.now()
-    if 4 > agora.hour < 12:
+    if 4 <= agora.hour < 12:
         return "Bom dia"
     elif 12 <= agora.hour < 18:
         return "Boa tarde"
-    else :
+    else:
         return "Boa noite"
 
+
 def inicio():
-    if not verificar_autenticacao():
-        return
+    #if not verificar_autenticacao():
+        #return
 
     nome_usuario = st.session_state.get("nome_de_usuario", "Cliente")
     saudacao = obter_saudacao()

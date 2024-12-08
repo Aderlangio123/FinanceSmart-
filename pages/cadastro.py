@@ -76,19 +76,18 @@ def cadastro_usuario():
         foto = st.file_uploader("Envie sua foto de perfil:", type=["jpg", "jpeg", "png"])
 
         if st.button("Cadastrar"):
-            if not foto:
-                st.error("Você precisa enviar uma foto de perfil!")
-            elif verificar_email(email) and verificarsenha(senha):
+            if verificar_email(email) and verificarsenha(senha):
                 # Armazena os dados na sessão
                 st.session_state.email = email
                 st.session_state.nome_de_usuario = nome_de_usuario
                 st.session_state.senha = senha
-                st.session_state.foto_perfil = foto.read()
+                st.session_state.foto_perfil = foto.read() if foto else None  # Permite foto opcional
 
                 st.write("Cadastro concluído com sucesso!")
                 st.success("Você está autenticado agora!")
 
                 if st.button("Ver suas informações"):
                     st.switch_page("pages/Suas_Informações.py")
+
 
 cadastro_usuario()
