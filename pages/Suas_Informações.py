@@ -86,7 +86,16 @@ def exibir_informacoes():
 
         st.header("Foto de Perfil:")
         if foto is not None:
-            st.image(foto, caption="Foto de Perfil", width=290)
+            st.markdown(
+                f"""
+                <div style="text-align: center;">
+                    <img src="data:image/jpeg;base64,{base64.b64encode(foto).decode('utf-8')}" 
+                        alt="Foto de Perfil" 
+                        style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #4CAF50;">
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
             st.write("Deseja alterar sua foto?")
         else:
             st.warning("Nenhuma foto de perfil foi carregada. Você pode adicionar uma agora.")
