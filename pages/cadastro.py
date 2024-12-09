@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import re
 
 def verificarsenha(senha):
     senha = str(senha).strip()  # Remove espaços em branco no início e no final
@@ -9,9 +10,10 @@ def verificarsenha(senha):
     return True
 
 def verificar_email(email):
-    email = email.strip() 
-    if (email and "@gmail.com" not in email) or (email == "@gmail.com") or (email == "@GMAIL.COM"):
-        st.error("Email inválido. Tente novamente!")
+    email = email.strip()  
+    padrao_email = r"^[a-zA-Z0-9._%+-]+@gmail\.com$"
+    if not re.match(padrao_email, email):
+        st.error("Email inválido. Certifique-se de que é um e-mail válido do Gmail!")
         return False
     return True
 
