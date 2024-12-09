@@ -64,23 +64,19 @@ def saldo_total():
 
     saldo = total_lucros - total_despesas
 
-    # Encontrar a categoria com o maior gasto
     categorias_gastos = {}
     for despesa in st.session_state.despesas:
         categoria = despesa['categoria']
         categorias_gastos[categoria] = categorias_gastos.get(categoria, 0) + despesa['valor']
 
-    # Identificar a categoria com o maior gasto
     categoria_maior_gasto = max(categorias_gastos, key=categorias_gastos.get, default=None)
     valor_maior_gasto = categorias_gastos.get(categoria_maior_gasto, 0)
 
-    # Encontrar a categoria com o maior lucro
     categorias_lucros = {}
     for lucro in st.session_state.lucros:
         categoria = lucro['categoria']
         categorias_lucros[categoria] = categorias_lucros.get(categoria, 0) + lucro['valor']
 
-    # Identificar a categoria com o maior lucro
     categoria_maior_lucro = max(categorias_lucros, key=categorias_lucros.get, default=None)
     valor_maior_lucro = categorias_lucros.get(categoria_maior_lucro, 0)
 
@@ -112,11 +108,9 @@ def saldo_total():
     else:
         st.success(f"Parabéns, {nome_usuario}: Seu saldo está positivo! Continue assim!")
 
-    # Exibir aviso para a categoria com maior gasto
     if categoria_maior_gasto:
         st.warning(f"Atenção: A categoria com o maior gasto é '{categoria_maior_gasto}' com um total de R${valor_maior_gasto:.2f}. Avalie se é possível reduzir essa despesa.")
 
-    # Exibir aviso para a categoria com maior lucro
     if categoria_maior_lucro:
         st.success(f"Parabéns: A categoria com o maior lucro é '{categoria_maior_lucro}' com um total de R${valor_maior_lucro:.2f}.")
 

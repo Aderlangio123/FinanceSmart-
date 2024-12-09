@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
-from datetime import datetime  # Importando para pegar a data e hora atual
-from collections import defaultdict  # Para agrupar as despesas por categoria
+from datetime import datetime  
+from collections import defaultdict  
 
 def verificar_autenticacao():
     if "email" not in st.session_state or "nome_de_usuario" not in st.session_state or "senha" not in st.session_state:
@@ -68,17 +68,15 @@ def despesas_total():
     """, unsafe_allow_html=True)
 
     if "despesas" in st.session_state and len(st.session_state.despesas) > 0:
-        # Agrupar as despesas por categoria
         despesas_por_categoria = defaultdict(list)
         for despesa in st.session_state.despesas:
             despesas_por_categoria[despesa['categoria']].append(despesa)
         
-        total_geral = 0  # Para o total geral de todas as despesas
+        total_geral = 0  
 
-        # Exibir as despesas agrupadas por categoria
         for categoria, despesas in despesas_por_categoria.items():
             st.markdown(f"### {categoria}")
-            total_categoria = 0  # Para o total de cada categoria
+            total_categoria = 0  
 
             for despesa in despesas:
                 st.write(f"Despesa: {despesa['nome']}")

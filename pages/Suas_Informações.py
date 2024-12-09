@@ -2,6 +2,12 @@ import streamlit as st
 import base64
 from PIL import Image
 
+def verificarsenha(senha):
+    if len(str(senha)) < 8:
+        st.error("A senha deve conter no mínimo 8 dígitos!")
+        return False
+    return True
+
 with open("inf.css") as css:
     st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 with open("buttoninf.css") as css:
@@ -76,9 +82,8 @@ def exibir_informacoes():
         email = st.session_state.get("email")
         nome_de_usuario = st.session_state.get("nome_de_usuario")
         senha = st.session_state.get("senha")
-        foto = st.session_state.get("foto_perfil")  # Recuperar a foto do cliente
+        foto = st.session_state.get("foto_perfil")  
 
-        # Exibir a foto de perfil atual (se houver)
         st.header("Foto de Perfil:")
         if foto is not None:
             st.image(foto, caption="Foto de Perfil", width=290)
@@ -86,16 +91,13 @@ def exibir_informacoes():
         else:
             st.warning("Nenhuma foto de perfil foi carregada. Você pode adicionar uma agora.")
 
-        # Upload de nova foto
         nova_foto = st.file_uploader("Envie ou altere sua foto de perfil:", type=["jpg", "jpeg", "png"])
         if nova_foto:
             st.session_state.foto_perfil = nova_foto.read()
-            st.session_state.nova_foto_carregada = True  # Marcar que uma nova foto foi carregada
+            st.session_state.nova_foto_carregada = True 
 
-        # Mostrar botão de atualizar se uma nova foto for carregada
         if st.session_state.get("nova_foto_carregada"):
             if st.button("ATUALIZAR"):
-                # Recarregar a página e resetar a flag
                 st.session_state.nova_foto_carregada = False
 
         st.header("Informações do seu cadastro:")
@@ -114,7 +116,6 @@ def exibir_informacoes():
         else:
             st.write("**********")
 
-        # Funcionalidade para alterar informações
         if "atualizado" not in st.session_state:
             st.session_state.atualizado = False
 
@@ -131,6 +132,7 @@ def exibir_informacoes():
             st.header("Digite suas novas informações:")
             novo_nome = st.text_input("Novo nome de usuário:")
             nova_senha = st.text_input("Nova senha:", type="password")
+            verificarsenha(nova_senha)
             
             if st.button("ALTERAR (clique 2 vezes)"):
                 if novo_nome and nova_senha:

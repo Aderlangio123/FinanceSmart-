@@ -15,28 +15,25 @@ def verificar_autenticacao():
     return True
 
 def obter_horario_local():
-    # Define o fuso horário correto
     fuso_horario = pytz.timezone("America/Sao_Paulo")
-    agora_utc = datetime.now(pytz.utc)  # Obtém o horário atual em UTC
-    agora_local = agora_utc.astimezone(fuso_horario)  # Converte para o horário local
+    agora_utc = datetime.now(pytz.utc) 
+    agora_local = agora_utc.astimezone(fuso_horario)  
     return agora_local
 
-# Exemplo de uso
 agora = obter_horario_local()
 print(f"Horário local ajustado: {agora}")
 
 def obter_horario_local():
-    # Define o fuso horário correto
     fuso_horario = pytz.timezone("America/Sao_Paulo")
-    agora_utc = datetime.now(pytz.utc)  # Obtém o horário atual em UTC
-    agora_local = agora_utc.astimezone(fuso_horario)  # Converte para o horário local
+    agora_utc = datetime.now(pytz.utc)  
+    agora_local = agora_utc.astimezone(fuso_horario)  
     return agora_local
 
 agora = obter_horario_local()
 print(f"Horário local ajustado: {agora}")
 
 def obter_saudacao():
-    agora = obter_horario_local()  # Usa o horário local ajustado
+    agora = obter_horario_local() 
     if 4 <= agora.hour < 12:
         return "Bom dia"
     elif 12 <= agora.hour < 18:

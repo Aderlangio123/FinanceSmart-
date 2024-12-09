@@ -91,7 +91,6 @@ def despesas():
     nome_despesa = st.text_input("Nome ou descrição da despesa:")
     valor_despesa = st.number_input("Informe o valor da despesa", min_value=0.0, format="%.2f")
 
-    # Lista de categorias de despesa
     categorias = [
         "Alimentação", "Transporte", "Saúde", "Educação", "Moradia", 
         "Lazer", "Roupas", "Tecnologia", "Impostos", "Outros"
@@ -100,7 +99,6 @@ def despesas():
 
     if st.button("Adicionar despesa"):
         if valor_despesa > 0 and nome_despesa.strip() != "" and categoria_despesa != "":
-            # Ajustando para o fuso horário correto
             fuso_horario = pytz.timezone("America/Sao_Paulo")
             horario_adicao = datetime.now(pytz.utc).astimezone(fuso_horario).strftime("%Y-%m-%d %H:%M:%S")
 

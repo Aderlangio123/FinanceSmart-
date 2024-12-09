@@ -77,11 +77,10 @@ def cadastro_usuario():
 
         if st.button("Cadastrar"):
             if verificar_email(email) and verificarsenha(senha):
-                # Armazena os dados na sessão
                 st.session_state.email = email
                 st.session_state.nome_de_usuario = nome_de_usuario
                 st.session_state.senha = senha
-                st.session_state.foto_perfil = foto.read() if foto else None  # Permite foto opcional
+                st.session_state.foto_perfil = foto.read() if foto else None  
 
                 st.write("Cadastro concluído com sucesso!")
                 st.success("Você está autenticado agora!")

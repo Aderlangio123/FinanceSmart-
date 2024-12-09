@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 from datetime import datetime
-import pytz  # Para manipulação de fuso horário
+import pytz  
 
 st.sidebar.image("img/logo-empresa.png")
 
@@ -75,7 +75,6 @@ def lucros():
 
     if st.button("Adicionar lucro", key="button-lucro"):
         if valor_lucro > 0 and nome_lucro.strip() != "" and categoria_lucro != "":
-            # Ajustando para o fuso horário correto
             fuso_horario = pytz.timezone("America/Sao_Paulo")
             horario_adicao = datetime.now(pytz.utc).astimezone(fuso_horario).strftime("%Y-%m-%d %H:%M:%S")
             

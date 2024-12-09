@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 from datetime import datetime 
-from collections import defaultdict  # Para agrupar as despesas por categoria
+from collections import defaultdict  
 
 with open("strong.css") as css:
                 st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
@@ -78,7 +78,6 @@ def lucros():
             st.warning("Nenhum lucro registrado.")
             return
 
-        # Agrupar lucros por categoria
     lucros_por_categoria = defaultdict(list)
     for lucro in st.session_state.lucros:
             lucros_por_categoria[lucro["categoria"]].append(lucro)
@@ -87,10 +86,9 @@ def lucros():
 
     st.markdown(f"<h1 style='color: white; background-color: #333333; padding: 10px; border-radius: 10px;'>Lucros Totais</h1>", unsafe_allow_html=True)
 
-        # Exibir lucros agrupados por categoria
     for categoria, lucros in lucros_por_categoria.items():
             st.markdown(f"### {categoria}")
-            total_categoria = 0  # Para o total de cada categoria
+            total_categoria = 0  
 
             for lucro in lucros:
                 st.write(f"**Nome:** {lucro['nome']}")
