@@ -3,8 +3,9 @@ import base64
 from PIL import Image
 
 def verificarsenha(senha):
-    if len(str(senha)) < 8:
-        st.error("A senha deve conter no mínimo 8 dígitos!")
+    senha = str(senha).strip()  # Remove espaços em branco no início e no final
+    if len(senha) < 8:
+        st.error("A senha deve conter no mínimo 8 caracteres não vazios!")
         return False
     return True
 
