@@ -9,6 +9,7 @@ def verificarsenha(senha):
     return True
 
 def verificar_email(email):
+    email = email.strip() 
     if (email and "@gmail.com" not in email) or (email == "@gmail.com") or (email == "@GMAIL.COM"):
         st.error("Email inválido. Tente novamente!")
         return False
