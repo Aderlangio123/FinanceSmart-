@@ -132,20 +132,22 @@ def exibir_informacoes():
             st.header("Digite suas novas informações:")
             novo_nome = st.text_input("Novo nome de usuário:")
             nova_senha = st.text_input("Nova senha:", type="password")
-            verificarsenha(nova_senha)
             
             if st.button("ALTERAR (clique 2 vezes)"):
                 if novo_nome and nova_senha:
-                    st.session_state.nome_de_usuario = novo_nome
-                    st.session_state.senha = nova_senha
-                    st.session_state.atualizado = True
-                    st.session_state.em_alteracao = False
-                    st.success("Suas informações foram atualizadas com sucesso!")
+                    if verificarsenha(nova_senha): 
+                        st.session_state.nome_de_usuario = novo_nome
+                        st.session_state.senha = nova_senha
+                        st.session_state.atualizado = True
+                        st.session_state.em_alteracao = False
+                        st.success("Suas informações foram atualizadas com sucesso!")
+                    else:
+                        st.warning("A senha não atende aos critérios. Tente novamente.")
                 else:
                     st.warning("Por favor, preencha todos os campos.")
 
-        if st.session_state.atualizado and not st.session_state.em_alteracao:
-            st.info("Suas informações já foram atualizadas.")
+            if st.session_state.atualizado and not st.session_state.em_alteracao:
+                st.info("Suas informações já foram atualizadas.")
 
 if __name__ == "__main__":
     exibir_informacoes()
